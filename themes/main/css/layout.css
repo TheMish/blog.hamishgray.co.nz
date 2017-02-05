@@ -1,0 +1,193 @@
+/** ----------------------------------------------------------
+ *
+ *		Blue	: #236b83
+ *		Black 	: #171819
+ *		
+ * ------------------------------------------------------- */
+
+@media (min-width: 768px){}
+@media (min-width: 992px){}
+@media (min-width: 1200px){}
+
+
+/* ==============================================================
+ *		Main Layout
+ ================================================================ */
+ 
+ 
+/* STRUCTURE */
+
+body {
+    margin: 0;
+    background-color: #fff;
+    -webkit-text-size-adjust: none; }
+    body.noscroll { overflow: hidden; }
+    
+    .main { }
+		
+	.v-align { display: table; height: 100%; }
+		.v-align-inner { display: table-cell; height: 100%; float: none; vertical-align: middle; }	
+			
+	
+/* GRID */
+	
+.container { position: relative; z-index: 1; }
+
+
+/* ==============================================================
+ *		Quick Styles
+ ================================================================ */
+
+
+/* HORIZONTAL RULE */
+hr { border-top: 2px solid rgba(145,164,181,0.25); height: 0; width:100%; margin: 20px 0; display: inline-block; clear: both; }
+.dark hr { border-top: 2px solid rgba(255,255,255,0.25); }
+.center hr { width: 80px; margin-left: auto; margin-right: auto; }
+
+hr.left { width: 60px; }
+hr.thin { border-width: 1px; margin: 0; }
+
+
+/* TYPE STYLING */
+.np {padding:0 !important;}
+.nm {margin:0 !important;}
+.floatR, .fr { float:right; }
+.floatL, .fl { float:left; }
+.mcenter { margin-left: auto;margin-right: auto; float: none; }
+.center { text-align: center; }
+.caps { text-transform: uppercase; }
+
+
+.overlay { width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: 0; }
+
+
+/* ==============================================================
+ *		Sections
+ ================================================================ */
+
+    	 
+.section { position: relative; padding-top: 60px; background-size: cover; background-position: center; background-repeat: no-repeat; }
+
+.section:last-child { padding-bottom: 60px; }
+
+.sec_wh { background-color: #fff; border-bottom: 1px solid rgba(0,0,0,0.1); }
+
+.sec_grey { background-color: #f2f2f2; border-bottom: 1px solid rgba(0,0,0,0.1); }
+
+.sec_black { background-color: #171819; color: #fff; }
+
+.sec_brand { background-color: #236b83; color: #fff; }
+
+
+
+/* ==============================================================
+ *		Header
+ ================================================================ */
+
+
+#nav ul li a,
+#nav ul li a:after {   
+    -webkit-transition: all 200ms;
+    -moz-transition: all 200ms;
+    -o-transition: all 200ms;
+    transition: all 200ms; }
+    
+
+#nav { 
+	position: fixed; z-index: 100; top: 0; left: 0;
+    height: 90px; width: 100%; padding: 0 30px; }
+    
+	#nav .brand { height: 100%; position: relative; display: block; float: left; padding-top: 20px; }
+	#nav .brand img { height: 100%; position: relative; display: block; }
+    
+    #nav ul { float: right; padding: 0; }
+    #nav ul li { float: left; }
+    #nav ul li a { padding: 25px 20px; color: #C5C5C5; position: relative; }
+    #nav ul li a:hover, #nav ul li a:focus { background-color: transparent; color: #fff; }
+    #nav ul li a:after { content: ""; height: 0px; width: 100%; position: absolute; top: 0; left: 0; background-color: #fff; }
+    #nav ul li a:hover:after { height: 5px; }
+
+
+/* ==============================================================
+ *		Footer
+ ================================================================ */
+
+#footer { padding: 30px 0; width: 100%; background-color: #000; overflow: hidden; }
+
+
+/* ==============================================================
+ *		Banner
+ ================================================================ */
+
+#banner { 
+	padding: 60px 0 120px; position: relative; background-color: #271238; pointer-events: none;
+	background-size: cover; background-position: center; background-repeat: no-repeat; }
+	
+#banner .banner-inner { height: 100%; width: 100%; display: table; padding: 30px; z-index: 10; position: relative; }
+
+#banner .overlay { background-color: #000; opacity: 0.25; filter: alpha(opacity="25"); }
+
+#banner .brand { margin-top: 20px; margin-bottom: 40px; display: block; }
+#banner .brand img { width: 100%; }
+
+
+#banner.home { padding: 60px 0; }
+
+@media (min-width: 768px){
+
+	#banner .brand img { width: 300px; }
+	
+}
+@media (min-width: 992px){}
+@media (min-width: 1200px){}
+
+
+/* ==============================================================
+ *		Box Styles
+ ================================================================ */
+
+
+.box-content,
+.box-content .title,
+.box.work .overlay {   
+    -webkit-transition: all 300ms;
+    -moz-transition: all 300ms;
+    -o-transition: all 300ms;
+    transition: all 300ms; }
+    
+    
+
+.box { 
+	padding: 0; height: 200px; background-color: #fff; display: table; 
+	background-size: cover; background-repeat: no-repeat; background-position: center; box-shadow: 0 0 0 1px rgba(145,164,181,0.25); }
+
+.box.height2 { height: 400px }
+
+	.box .box-inner { padding: 5px 30px; display: table-cell; vertical-align: middle; } 
+	
+
+	.box .box-content { 
+		position: absolute; z-index: 1; bottom: 0; left: 15px; right: 15px; padding: 0 15px; height: 0; overflow: hidden;
+		background-color: #fff; color: #1F292D; display: table-cell; vertical-align: middle; box-shadow: 0 0 0 1px rgba(0,0,0,0.1); }
+		
+		.box .box-content h4, .box .box-content h5, .box .box-content h6, .box .box-content p, .box .box-content a { color: #1F292D; }
+		.box .box-content a:hover { color: #000; }
+		.box:hover .box-content { height: 64px; bottom: -32px; padding: 15px 15px; }
+		.box .box-content .title { margin-top: -45px; margin-bottom: 0; }
+		.box:hover .box-content .title { margin-top: 10px; }
+
+
+
+/* ==============================================================
+ *		Blog Post
+ ================================================================ */
+
+
+.main_img { padding-bottom: 15px; }
+
+.gallery_img { width: 50%; padding: 15px; float: left; }
+
+#post-meta { background-position: center; padding: 8px; height: 120px; margin-top: -60px; border: 1px solid rgba(255,255,255,0.2); text-align: center; display: table; }
+#post-meta .inner { background-color: #0f1010; height: 100%; display: table-cell; vertical-align: middle; }
+
+
