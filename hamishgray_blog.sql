@@ -1,23 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2
--- http://www.phpmyadmin.net
+-- version 4.6.4
+-- https://www.phpmyadmin.net/
 --
--- Host: internal-db.s217846.gridserver.com
--- Generation Time: Feb 05, 2017 at 01:06 PM
--- Server version: 5.6.33-79.0
--- PHP Version: 5.6.21
+-- Host: localhost:8889
+-- Generation Time: Apr 02, 2017 at 05:27 PM
+-- Server version: 5.6.33
+-- PHP Version: 7.0.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db217846_hamishgray_blog`
+-- Database: `hamishgray_blog`
 --
 
 -- --------------------------------------------------------
@@ -26,11 +26,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `Blog`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `PostsPerPage` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE `Blog` (
+  `ID` int(11) NOT NULL,
+  `PostsPerPage` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Blog`
@@ -45,18 +44,15 @@ INSERT INTO `Blog` (`ID`, `PostsPerPage`) VALUES
 -- Table structure for table `BlogCategory`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogCategory` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogCategory` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('BlogCategory') DEFAULT 'BlogCategory',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(255) DEFAULT NULL,
   `URLSegment` varchar(255) DEFAULT NULL,
-  `BlogID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -64,13 +60,12 @@ CREATE TABLE IF NOT EXISTS `BlogCategory` (
 -- Table structure for table `BlogEntry`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogEntry` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogEntry` (
+  `ID` int(11) NOT NULL,
   `Date` datetime DEFAULT NULL,
   `Author` mediumtext,
-  `Tags` mediumtext,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Tags` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -78,13 +73,12 @@ CREATE TABLE IF NOT EXISTS `BlogEntry` (
 -- Table structure for table `BlogEntry_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogEntry_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogEntry_Live` (
+  `ID` int(11) NOT NULL,
   `Date` datetime DEFAULT NULL,
   `Author` mediumtext,
-  `Tags` mediumtext,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Tags` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -92,18 +86,14 @@ CREATE TABLE IF NOT EXISTS `BlogEntry_Live` (
 -- Table structure for table `BlogEntry_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogEntry_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogEntry_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `Date` datetime DEFAULT NULL,
   `Author` mediumtext,
-  `Tags` mediumtext,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Tags` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -111,14 +101,12 @@ CREATE TABLE IF NOT EXISTS `BlogEntry_versions` (
 -- Table structure for table `BlogHolder`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogHolder` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `AllowCustomAuthors` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowFullEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `OwnerID` (`OwnerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE `BlogHolder` (
+  `ID` int(11) NOT NULL,
+  `AllowCustomAuthors` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowFullEntry` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -126,14 +114,12 @@ CREATE TABLE IF NOT EXISTS `BlogHolder` (
 -- Table structure for table `BlogHolder_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogHolder_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `AllowCustomAuthors` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowFullEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `OwnerID` (`OwnerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+CREATE TABLE `BlogHolder_Live` (
+  `ID` int(11) NOT NULL,
+  `AllowCustomAuthors` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowFullEntry` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -141,19 +127,14 @@ CREATE TABLE IF NOT EXISTS `BlogHolder_Live` (
 -- Table structure for table `BlogHolder_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogHolder_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogHolder_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `AllowCustomAuthors` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowFullEntry` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `OwnerID` (`OwnerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `AllowCustomAuthors` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowFullEntry` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -161,13 +142,13 @@ CREATE TABLE IF NOT EXISTS `BlogHolder_versions` (
 -- Table structure for table `BlogPost`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost` (
+  `ID` int(11) NOT NULL,
   `PublishDate` datetime DEFAULT NULL,
   `AuthorNames` varchar(1024) DEFAULT NULL,
   `Summary` mediumtext,
   `FeaturedImageID` int(11) NOT NULL DEFAULT '0',
-  `DoubleHeight` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `DoubleHeight` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ThumbnailImageID` int(11) NOT NULL DEFAULT '0',
   `Introduction` mediumtext,
   `Country` mediumtext,
@@ -175,15 +156,10 @@ CREATE TABLE IF NOT EXISTS `BlogPost` (
   `DateVisited` date DEFAULT NULL,
   `CountryID` int(11) NOT NULL DEFAULT '0',
   `CountryIDID` int(11) NOT NULL DEFAULT '0',
-  `ProvideComments` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ProvideComments` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ModerationRequired` enum('None','Required','NonMembersOnly') DEFAULT 'None',
-  `CommentsRequireLogin` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `FeaturedImageID` (`FeaturedImageID`),
-  KEY `ThumbnailImageID` (`ThumbnailImageID`),
-  KEY `CountryID` (`CountryID`),
-  KEY `CountryIDID` (`CountryIDID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+  `CommentsRequireLogin` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost`
@@ -223,14 +199,11 @@ INSERT INTO `BlogPost` (`ID`, `PublishDate`, `AuthorNames`, `Summary`, `Featured
 -- Table structure for table `BlogPost_Authors`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Authors` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Authors` (
+  `ID` int(11) NOT NULL,
   `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogPostID` (`BlogPostID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost_Authors`
@@ -274,14 +247,11 @@ INSERT INTO `BlogPost_Authors` (`ID`, `BlogPostID`, `MemberID`) VALUES
 -- Table structure for table `BlogPost_Categories`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Categories` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Categories` (
+  `ID` int(11) NOT NULL,
   `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  `BlogCategoryID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogPostID` (`BlogPostID`),
-  KEY `BlogCategoryID` (`BlogCategoryID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogCategoryID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -289,13 +259,13 @@ CREATE TABLE IF NOT EXISTS `BlogPost_Categories` (
 -- Table structure for table `BlogPost_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Live` (
+  `ID` int(11) NOT NULL,
   `PublishDate` datetime DEFAULT NULL,
   `AuthorNames` varchar(1024) DEFAULT NULL,
   `Summary` mediumtext,
   `FeaturedImageID` int(11) NOT NULL DEFAULT '0',
-  `DoubleHeight` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `DoubleHeight` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ThumbnailImageID` int(11) NOT NULL DEFAULT '0',
   `Introduction` mediumtext,
   `Country` mediumtext,
@@ -303,15 +273,10 @@ CREATE TABLE IF NOT EXISTS `BlogPost_Live` (
   `DateVisited` date DEFAULT NULL,
   `CountryID` int(11) NOT NULL DEFAULT '0',
   `CountryIDID` int(11) NOT NULL DEFAULT '0',
-  `ProvideComments` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ProvideComments` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ModerationRequired` enum('None','Required','NonMembersOnly') DEFAULT 'None',
-  `CommentsRequireLogin` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `FeaturedImageID` (`FeaturedImageID`),
-  KEY `ThumbnailImageID` (`ThumbnailImageID`),
-  KEY `CountryID` (`CountryID`),
-  KEY `CountryIDID` (`CountryIDID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+  `CommentsRequireLogin` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost_Live`
@@ -351,14 +316,11 @@ INSERT INTO `BlogPost_Live` (`ID`, `PublishDate`, `AuthorNames`, `Summary`, `Fea
 -- Table structure for table `BlogPost_Tags`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_Tags` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_Tags` (
+  `ID` int(11) NOT NULL,
   `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  `BlogTagID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogPostID` (`BlogPostID`),
-  KEY `BlogTagID` (`BlogTagID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogTagID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -366,15 +328,15 @@ CREATE TABLE IF NOT EXISTS `BlogPost_Tags` (
 -- Table structure for table `BlogPost_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogPost_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogPost_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `PublishDate` datetime DEFAULT NULL,
   `AuthorNames` varchar(1024) DEFAULT NULL,
   `Summary` mediumtext,
   `FeaturedImageID` int(11) NOT NULL DEFAULT '0',
-  `DoubleHeight` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `DoubleHeight` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ThumbnailImageID` int(11) NOT NULL DEFAULT '0',
   `Introduction` mediumtext,
   `Country` mediumtext,
@@ -382,18 +344,10 @@ CREATE TABLE IF NOT EXISTS `BlogPost_versions` (
   `DateVisited` date DEFAULT NULL,
   `CountryID` int(11) NOT NULL DEFAULT '0',
   `CountryIDID` int(11) NOT NULL DEFAULT '0',
-  `ProvideComments` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ProvideComments` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ModerationRequired` enum('None','Required','NonMembersOnly') DEFAULT 'None',
-  `CommentsRequireLogin` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `FeaturedImageID` (`FeaturedImageID`),
-  KEY `ThumbnailImageID` (`ThumbnailImageID`),
-  KEY `CountryID` (`CountryID`),
-  KEY `CountryIDID` (`CountryIDID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=201 ;
+  `CommentsRequireLogin` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogPost_versions`
@@ -607,8 +561,8 @@ INSERT INTO `BlogPost_versions` (`ID`, `RecordID`, `Version`, `PublishDate`, `Au
 -- Table structure for table `BlogSection`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogSection` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogSection` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('BlogSection') DEFAULT 'BlogSection',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -617,12 +571,8 @@ CREATE TABLE IF NOT EXISTS `BlogSection` (
   `Sort` int(11) NOT NULL DEFAULT '0',
   `MainImageID` int(11) NOT NULL DEFAULT '0',
   `ParentID` int(11) NOT NULL DEFAULT '0',
-  `ImageLayout` mediumtext,
-  PRIMARY KEY (`ID`),
-  KEY `MainImageID` (`MainImageID`),
-  KEY `ClassName` (`ClassName`),
-  KEY `ParentID` (`ParentID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=108 ;
+  `ImageLayout` mediumtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogSection`
@@ -634,8 +584,8 @@ INSERT INTO `BlogSection` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, 
 (9, 'BlogSection', '2016-02-27 03:13:52', '2016-02-24 02:00:46', NULL, NULL, 3, 50, 6, 'FullWidth'),
 (10, 'BlogSection', '2016-02-27 03:13:52', '2016-02-24 05:04:05', NULL, NULL, 4, 0, 6, 'FixedWidth'),
 (11, 'BlogSection', '2016-02-27 03:13:52', '2016-02-24 05:04:59', NULL, NULL, 5, 86, 6, 'FullWidth'),
-(12, 'BlogSection', '2016-02-27 02:56:55', '2016-02-27 02:35:35', NULL, '<p class="lead"><span>Hi, I''m Hamish, </span>I''m a designer, developer and budding travel photographer from Timaru, New Zealand.</p>\n<p>I''m about to embark on a grand adventure around Southeast Asia and Europe, and I''ve built this blog to share my journey. I''ll be posting photos of the places I go, people I see, and things I do around the world, and writing about the experiences.</p>\n<p>I''ve never blogged before so this will be quite a challenge, but I''m determined to document the trip - even if it''s just through photos!</p>\n<hr><h4>My itinerary is as follows:</h4>\n<ul><li>March 1 - Bangkok, Thailand</li>\n<li>March 4 - Chiang Mai, Thailand</li>\n<li>March 8 - Houay Xai, Laos</li>\n<li>March 9 - Ban Pak Nguey, Laos</li>\n<li>March 10 - Luang Prabang, Laos</li>\n<li>March 15 - Vang Vieng, Laos</li>\n<li>March 16 - Vientiane, Laos</li>\n<li>March 18 - Hanoi, Vietnam</li>\n<li>March 21 - Halong Bay, Vietnam</li>\n<li>March 24 - Hoi An, Vietnam</li>\n<li>March 28 - Phu Quoc, Vietnam</li>\n<li>April 1 - Ho Chi Minh City, Vietnam</li>\n<li>April 3 - Singapore</li>\n<li>April 7 - London, UK</li>\n<li>April 16 - Venice, Italy</li>\n<li>April 19 - Florence, Italy</li>\n<li>April 21 - Rome, Italy</li>\n<li>April 24 - Pisa, Italy</li>\n<li>April 25 - Cinque Terre, Italy</li>\n<li>April 28 - Nice, France</li>\n<li>April 29 - Marseille, France</li>\n<li>May 2 - Barcelona, Spain</li>\n</ul>', 1, 0, 11, 'FixedWidth'),
-(13, 'BlogSection', '2016-02-27 03:20:44', '2016-02-27 03:13:42', 'Introduction', '<p class="lead">World famous in New Zealand, Napier holds the title for Art Deco capital. </p>\n<p>This amazing little city suffered a devastating<span> 7.9 magnitude</span> earthquake in 1931 which levelled much of the city, and killed 256 people. A further 525 aftershocks were recorded in the following two weeks.</p>\n<h4>Two years later, a new Napier rose out of the devastation. </h4>\n<p>A by-product of the horrible event was the flat land on which Marine Parade''s gardens, memorials and soundshell were built. Napier''s art deco and modernist architecture, already in vogue in the United States, was seen as an affordable way of rebuilding.</p>\n<p>Now, 85 years on, every year Napier puts on the Art Deco festival where people from all around the country come together in Napier in their best ''30s style clothing to celebrate the city, and enjoy the festivities!</p>', 1, 0, 6, 'FixedWidth'),
+(12, 'BlogSection', '2016-02-27 02:56:55', '2016-02-27 02:35:35', NULL, '<p class="lead"><span>Hi, I\'m Hamish, </span>I\'m a designer, developer and budding travel photographer from Timaru, New Zealand.</p>\n<p>I\'m about to embark on a grand adventure around Southeast Asia and Europe, and I\'ve built this blog to share my journey. I\'ll be posting photos of the places I go, people I see, and things I do around the world, and writing about the experiences.</p>\n<p>I\'ve never blogged before so this will be quite a challenge, but I\'m determined to document the trip - even if it\'s just through photos!</p>\n<hr><h4>My itinerary is as follows:</h4>\n<ul><li>March 1 - Bangkok, Thailand</li>\n<li>March 4 - Chiang Mai, Thailand</li>\n<li>March 8 - Houay Xai, Laos</li>\n<li>March 9 - Ban Pak Nguey, Laos</li>\n<li>March 10 - Luang Prabang, Laos</li>\n<li>March 15 - Vang Vieng, Laos</li>\n<li>March 16 - Vientiane, Laos</li>\n<li>March 18 - Hanoi, Vietnam</li>\n<li>March 21 - Halong Bay, Vietnam</li>\n<li>March 24 - Hoi An, Vietnam</li>\n<li>March 28 - Phu Quoc, Vietnam</li>\n<li>April 1 - Ho Chi Minh City, Vietnam</li>\n<li>April 3 - Singapore</li>\n<li>April 7 - London, UK</li>\n<li>April 16 - Venice, Italy</li>\n<li>April 19 - Florence, Italy</li>\n<li>April 21 - Rome, Italy</li>\n<li>April 24 - Pisa, Italy</li>\n<li>April 25 - Cinque Terre, Italy</li>\n<li>April 28 - Nice, France</li>\n<li>April 29 - Marseille, France</li>\n<li>May 2 - Barcelona, Spain</li>\n</ul>', 1, 0, 11, 'FixedWidth'),
+(13, 'BlogSection', '2016-02-27 03:20:44', '2016-02-27 03:13:42', 'Introduction', '<p class="lead">World famous in New Zealand, Napier holds the title for Art Deco capital. </p>\n<p>This amazing little city suffered a devastating<span> 7.9 magnitude</span> earthquake in 1931 which levelled much of the city, and killed 256 people. A further 525 aftershocks were recorded in the following two weeks.</p>\n<h4>Two years later, a new Napier rose out of the devastation. </h4>\n<p>A by-product of the horrible event was the flat land on which Marine Parade\'s gardens, memorials and soundshell were built. Napier\'s art deco and modernist architecture, already in vogue in the United States, was seen as an affordable way of rebuilding.</p>\n<p>Now, 85 years on, every year Napier puts on the Art Deco festival where people from all around the country come together in Napier in their best \'30s style clothing to celebrate the city, and enjoy the festivities!</p>', 1, 0, 6, 'FixedWidth'),
 (14, 'BlogSection', '2016-03-04 04:17:21', '2016-03-04 04:03:35', NULL, NULL, 1, 0, 12, 'FixedWidth'),
 (15, 'BlogSection', '2016-03-07 23:54:31', '2016-03-07 23:54:30', NULL, NULL, 1, 0, 13, 'FixedWidth'),
 (16, 'BlogSection', '2016-03-08 00:09:52', '2016-03-08 00:09:50', NULL, NULL, 2, 199, 13, 'FullWidth'),
@@ -661,9 +611,9 @@ INSERT INTO `BlogSection` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, 
 (36, 'BlogSection', '2016-03-13 09:13:13', '2016-03-13 09:00:08', NULL, NULL, 2, 0, 19, 'FixedWidth'),
 (37, 'BlogSection', '2016-03-13 09:13:13', '2016-03-13 09:01:03', NULL, NULL, 4, 310, 19, 'FixedWidth'),
 (38, 'BlogSection', '2016-03-13 09:13:13', '2016-03-13 09:02:30', NULL, NULL, 5, 317, 19, 'FixedWidth'),
-(39, 'BlogSection', '2016-03-13 09:13:13', '2016-03-13 09:05:12', NULL, '<p>Our time at the white temple ends with a visit to the rightfully labelled "most beautiful toilet in Thailand". Surrounded by pristine white, and silver mirrored buildings and sculptures, the toilet block stands out like the grand palace in gold standing on the edge of the complex. </p>\n<p>Unfortunately I''d already paid a visit to the significantly lower class toilets at the food hall over the road... but I couldn''t say no to a little peek before hitting the road once more!</p>', 6, 0, 19, 'FixedWidth'),
-(40, 'BlogSection', '2016-03-13 09:19:06', '2016-03-13 09:12:24', NULL, '<p>The idea behind the ornate sculptures and designs of the temple is that in order to reach enlightenment - and heaven (or nirvana if you''re of the Buddhist persuasion) - you need to strip yourself of our materialistic and commercial obsessions. </p>\n<h4>The journey begins in hell. </h4>\n<p>You start on the other side of the moat, with hands, faces and creatures coming out of the sides of the bridge trying to trap and distract you. Walking past this is representative of you realising they are just holding you back, and by leaving them behind you move to a higher place. </p>\n<p>The journey then continues over the bridge which slowly leads you to the doors of the main temple. All is white and pure, with Buddha images, and sculptures of buddhist gods and beings. You are now on the doorstep of Heaven. </p>\n<p>The main hall of the temple itself is highly protected, you aren''t allowed to take photos inside so as to retain some mystery as to what''s on the other side. </p>', 3, 0, 19, 'FixedWidth'),
-(41, 'BlogSection', '2016-08-06 07:57:59', '2016-03-13 09:12:44', NULL, '<p>The famous temple, Wat Rong Khun of Chiang Mai, better known simply as the White Temple is a sight to behold. After an over abundance of gold and red temples in Bangkok and Chiang Mai, the pristine white and mirror mosaic temple is a welcome change! </p>\n<p>The temple was, and is, being financed by one of Thailand''s richest businessmen. It''s said that he''s spent upwards of 60 million NZD so far (1.5 billion Baht if you''re wondering!). </p>', 1, 0, 19, 'FixedWidth'),
+(39, 'BlogSection', '2016-03-13 09:13:13', '2016-03-13 09:05:12', NULL, '<p>Our time at the white temple ends with a visit to the rightfully labelled "most beautiful toilet in Thailand". Surrounded by pristine white, and silver mirrored buildings and sculptures, the toilet block stands out like the grand palace in gold standing on the edge of the complex. </p>\n<p>Unfortunately I\'d already paid a visit to the significantly lower class toilets at the food hall over the road... but I couldn\'t say no to a little peek before hitting the road once more!</p>', 6, 0, 19, 'FixedWidth'),
+(40, 'BlogSection', '2016-03-13 09:19:06', '2016-03-13 09:12:24', NULL, '<p>The idea behind the ornate sculptures and designs of the temple is that in order to reach enlightenment - and heaven (or nirvana if you\'re of the Buddhist persuasion) - you need to strip yourself of our materialistic and commercial obsessions. </p>\n<h4>The journey begins in hell. </h4>\n<p>You start on the other side of the moat, with hands, faces and creatures coming out of the sides of the bridge trying to trap and distract you. Walking past this is representative of you realising they are just holding you back, and by leaving them behind you move to a higher place. </p>\n<p>The journey then continues over the bridge which slowly leads you to the doors of the main temple. All is white and pure, with Buddha images, and sculptures of buddhist gods and beings. You are now on the doorstep of Heaven. </p>\n<p>The main hall of the temple itself is highly protected, you aren\'t allowed to take photos inside so as to retain some mystery as to what\'s on the other side. </p>', 3, 0, 19, 'FixedWidth'),
+(41, 'BlogSection', '2016-08-06 07:57:59', '2016-03-13 09:12:44', NULL, '<p>The famous temple, Wat Rong Khun of Chiang Mai, better known simply as the White Temple is a sight to behold. After an over abundance of gold and red temples in Bangkok and Chiang Mai, the pristine white and mirror mosaic temple is a welcome change! </p>\n<p>The temple was, and is, being financed by one of Thailand\'s richest businessmen. It\'s said that he\'s spent upwards of 60 million NZD so far (1.5 billion Baht if you\'re wondering!). </p>', 1, 0, 19, 'FixedWidth'),
 (42, 'BlogSection', '2016-03-17 15:06:25', '2016-03-17 15:06:23', NULL, NULL, 1, 0, 20, 'FixedWidth'),
 (43, 'BlogSection', '2016-03-17 15:07:51', '2016-03-17 15:07:49', NULL, NULL, 2, 331, 20, 'FullWidth'),
 (44, 'BlogSection', '2016-03-17 15:08:51', '2016-03-17 15:08:49', NULL, NULL, 3, 343, 20, 'FixedWidth'),
@@ -735,15 +685,12 @@ INSERT INTO `BlogSection` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, 
 -- Table structure for table `BlogSection_SectionImages`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogSection_SectionImages` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogSection_SectionImages` (
+  `ID` int(11) NOT NULL,
   `BlogSectionID` int(11) NOT NULL DEFAULT '0',
   `ImageID` int(11) NOT NULL DEFAULT '0',
-  `SortOrder` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogSectionID` (`BlogSectionID`),
-  KEY `ImageID` (`ImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=685 ;
+  `SortOrder` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `BlogSection_SectionImages`
@@ -1258,18 +1205,15 @@ INSERT INTO `BlogSection_SectionImages` (`ID`, `BlogSectionID`, `ImageID`, `Sort
 -- Table structure for table `BlogTag`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTag` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTag` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('BlogTag') DEFAULT 'BlogTag',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(255) DEFAULT NULL,
   `URLSegment` varchar(255) DEFAULT NULL,
-  `BlogID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1277,12 +1221,11 @@ CREATE TABLE IF NOT EXISTS `BlogTag` (
 -- Table structure for table `BlogTree`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTree` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTree` (
+  `ID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
-  `LandingPageFreshness` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LandingPageFreshness` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1290,12 +1233,11 @@ CREATE TABLE IF NOT EXISTS `BlogTree` (
 -- Table structure for table `BlogTree_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTree_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTree_Live` (
+  `ID` int(11) NOT NULL,
   `Name` varchar(255) DEFAULT NULL,
-  `LandingPageFreshness` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LandingPageFreshness` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1303,17 +1245,13 @@ CREATE TABLE IF NOT EXISTS `BlogTree_Live` (
 -- Table structure for table `BlogTree_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `BlogTree_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `BlogTree_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `Name` varchar(255) DEFAULT NULL,
-  `LandingPageFreshness` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LandingPageFreshness` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1321,14 +1259,11 @@ CREATE TABLE IF NOT EXISTS `BlogTree_versions` (
 -- Table structure for table `Blog_Contributors`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Contributors` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Contributors` (
+  `ID` int(11) NOT NULL,
   `BlogID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1336,14 +1271,11 @@ CREATE TABLE IF NOT EXISTS `Blog_Contributors` (
 -- Table structure for table `Blog_Editors`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Editors` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Editors` (
+  `ID` int(11) NOT NULL,
   `BlogID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1351,11 +1283,10 @@ CREATE TABLE IF NOT EXISTS `Blog_Editors` (
 -- Table structure for table `Blog_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `PostsPerPage` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE `Blog_Live` (
+  `ID` int(11) NOT NULL,
+  `PostsPerPage` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Blog_Live`
@@ -1370,16 +1301,12 @@ INSERT INTO `Blog_Live` (`ID`, `PostsPerPage`) VALUES
 -- Table structure for table `Blog_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `PostsPerPage` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+  `PostsPerPage` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Blog_versions`
@@ -1407,14 +1334,11 @@ INSERT INTO `Blog_versions` (`ID`, `RecordID`, `Version`, `PostsPerPage`) VALUES
 -- Table structure for table `Blog_Writers`
 --
 
-CREATE TABLE IF NOT EXISTS `Blog_Writers` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Blog_Writers` (
+  `ID` int(11) NOT NULL,
   `BlogID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BlogID` (`BlogID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1422,8 +1346,8 @@ CREATE TABLE IF NOT EXISTS `Blog_Writers` (
 -- Table structure for table `Comment`
 --
 
-CREATE TABLE IF NOT EXISTS `Comment` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Comment` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Comment') CHARACTER SET utf8 DEFAULT 'Comment',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1432,19 +1356,15 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   `Email` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
   `URL` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `BaseClass` varchar(200) CHARACTER SET utf8 DEFAULT NULL,
-  `Moderated` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `IsSpam` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `Moderated` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `IsSpam` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ParentID` int(11) NOT NULL DEFAULT '0',
-  `AllowHtml` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `AllowHtml` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `SecretToken` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `Depth` int(11) NOT NULL DEFAULT '0',
   `AuthorID` int(11) NOT NULL DEFAULT '0',
-  `ParentCommentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `AuthorID` (`AuthorID`),
-  KEY `ParentCommentID` (`ParentCommentID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `ParentCommentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Comment`
@@ -1463,18 +1383,16 @@ INSERT INTO `Comment` (`ID`, `ClassName`, `LastEdited`, `Created`, `Name`, `Comm
 -- Table structure for table `ContactRequest`
 --
 
-CREATE TABLE IF NOT EXISTS `ContactRequest` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ContactRequest` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('ContactRequest') DEFAULT 'ContactRequest',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Name` mediumtext,
   `Email` mediumtext,
   `Message` mediumtext,
-  `Sort` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `Sort` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1482,18 +1400,15 @@ CREATE TABLE IF NOT EXISTS `ContactRequest` (
 -- Table structure for table `Country`
 --
 
-CREATE TABLE IF NOT EXISTS `Country` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Country` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Country') DEFAULT 'Country',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` mediumtext,
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `PatternID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `PatternID` (`PatternID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+  `PatternID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Country`
@@ -1519,14 +1434,11 @@ INSERT INTO `Country` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, `Sor
 -- Table structure for table `Country_BlogPosts`
 --
 
-CREATE TABLE IF NOT EXISTS `Country_BlogPosts` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Country_BlogPosts` (
+  `ID` int(11) NOT NULL,
   `CountryID` int(11) NOT NULL DEFAULT '0',
-  `BlogPostID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `CountryID` (`CountryID`),
-  KEY `BlogPostID` (`BlogPostID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `BlogPostID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1534,11 +1446,10 @@ CREATE TABLE IF NOT EXISTS `Country_BlogPosts` (
 -- Table structure for table `ErrorPage`
 --
 
-CREATE TABLE IF NOT EXISTS `ErrorPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ErrorCode` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+CREATE TABLE `ErrorPage` (
+  `ID` int(11) NOT NULL,
+  `ErrorCode` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ErrorPage`
@@ -1554,11 +1465,10 @@ INSERT INTO `ErrorPage` (`ID`, `ErrorCode`) VALUES
 -- Table structure for table `ErrorPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `ErrorPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `ErrorCode` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+CREATE TABLE `ErrorPage_Live` (
+  `ID` int(11) NOT NULL,
+  `ErrorCode` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ErrorPage_Live`
@@ -1574,16 +1484,12 @@ INSERT INTO `ErrorPage_Live` (`ID`, `ErrorCode`) VALUES
 -- Table structure for table `ErrorPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `ErrorPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ErrorPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `ErrorCode` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `ErrorCode` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1591,8 +1497,8 @@ CREATE TABLE IF NOT EXISTS `ErrorPage_versions` (
 -- Table structure for table `File`
 --
 
-CREATE TABLE IF NOT EXISTS `File` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `File` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('File','Folder','Image','Image_Cached') DEFAULT 'File',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -1600,14 +1506,10 @@ CREATE TABLE IF NOT EXISTS `File` (
   `Title` varchar(255) DEFAULT NULL,
   `Filename` mediumtext,
   `Content` mediumtext,
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
   `ParentID` int(11) NOT NULL DEFAULT '0',
-  `OwnerID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `OwnerID` (`OwnerID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=780 ;
+  `OwnerID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `File`
@@ -2401,22 +2303,19 @@ INSERT INTO `File` (`ID`, `ClassName`, `LastEdited`, `Created`, `Name`, `Title`,
 -- Table structure for table `Group`
 --
 
-CREATE TABLE IF NOT EXISTS `Group` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Group` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Group') DEFAULT 'Group',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(255) DEFAULT NULL,
   `Description` mediumtext,
   `Code` varchar(255) DEFAULT NULL,
-  `Locked` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `Locked` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
   `HtmlEditorConfig` mediumtext,
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Group`
@@ -2433,14 +2332,11 @@ INSERT INTO `Group` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, `Descr
 -- Table structure for table `Group_Members`
 --
 
-CREATE TABLE IF NOT EXISTS `Group_Members` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Group_Members` (
+  `ID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL DEFAULT '0',
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `GroupID` (`GroupID`),
-  KEY `MemberID` (`MemberID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Group_Members`
@@ -2455,14 +2351,11 @@ INSERT INTO `Group_Members` (`ID`, `GroupID`, `MemberID`) VALUES
 -- Table structure for table `Group_Roles`
 --
 
-CREATE TABLE IF NOT EXISTS `Group_Roles` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Group_Roles` (
+  `ID` int(11) NOT NULL,
   `GroupID` int(11) NOT NULL DEFAULT '0',
-  `PermissionRoleID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `GroupID` (`GroupID`),
-  KEY `PermissionRoleID` (`PermissionRoleID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `PermissionRoleID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2470,19 +2363,16 @@ CREATE TABLE IF NOT EXISTS `Group_Roles` (
 -- Table structure for table `LoginAttempt`
 --
 
-CREATE TABLE IF NOT EXISTS `LoginAttempt` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `LoginAttempt` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('LoginAttempt') DEFAULT 'LoginAttempt',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Email` varchar(255) DEFAULT NULL,
   `Status` enum('Success','Failure') DEFAULT 'Success',
   `IP` varchar(255) DEFAULT NULL,
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `MemberID` (`MemberID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2490,8 +2380,8 @@ CREATE TABLE IF NOT EXISTS `LoginAttempt` (
 -- Table structure for table `Member`
 --
 
-CREATE TABLE IF NOT EXISTS `Member` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Member` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Member') DEFAULT 'Member',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -2516,12 +2406,8 @@ CREATE TABLE IF NOT EXISTS `Member` (
   `TimeFormat` varchar(30) DEFAULT NULL,
   `URLSegment` varchar(50) DEFAULT NULL,
   `BlogProfileSummary` mediumtext,
-  `BlogProfileImageID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `Email` (`Email`),
-  KEY `ClassName` (`ClassName`),
-  KEY `BlogProfileImageID` (`BlogProfileImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `BlogProfileImageID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Member`
@@ -2536,19 +2422,16 @@ INSERT INTO `Member` (`ID`, `ClassName`, `LastEdited`, `Created`, `FirstName`, `
 -- Table structure for table `MemberPassword`
 --
 
-CREATE TABLE IF NOT EXISTS `MemberPassword` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `MemberPassword` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('MemberPassword') DEFAULT 'MemberPassword',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Password` varchar(160) DEFAULT NULL,
   `Salt` varchar(50) DEFAULT NULL,
   `PasswordEncryption` varchar(50) DEFAULT NULL,
-  `MemberID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `MemberID` (`MemberID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `MemberID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `MemberPassword`
@@ -2563,18 +2446,16 @@ INSERT INTO `MemberPassword` (`ID`, `ClassName`, `LastEdited`, `Created`, `Passw
 -- Table structure for table `Page`
 --
 
-CREATE TABLE IF NOT EXISTS `Page` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Page` (
+  `ID` int(11) NOT NULL,
   `PageColor` varchar(6) DEFAULT NULL,
-  `LightTheme` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `NoBannerImage` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `LightTheme` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `NoBannerImage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `BannerImageID` int(11) NOT NULL DEFAULT '0',
-  `LightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerFullscreen` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerLightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BannerImageID` (`BannerImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+  `LightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerFullscreen` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerLightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Page`
@@ -2615,18 +2496,16 @@ INSERT INTO `Page` (`ID`, `PageColor`, `LightTheme`, `NoBannerImage`, `BannerIma
 -- Table structure for table `Page_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `Page_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Page_Live` (
+  `ID` int(11) NOT NULL,
   `PageColor` varchar(6) DEFAULT NULL,
-  `LightTheme` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `NoBannerImage` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `LightTheme` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `NoBannerImage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `BannerImageID` int(11) NOT NULL DEFAULT '0',
-  `LightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerFullscreen` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerLightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `BannerImageID` (`BannerImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+  `LightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerFullscreen` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerLightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Page_Live`
@@ -2667,23 +2546,18 @@ INSERT INTO `Page_Live` (`ID`, `PageColor`, `LightTheme`, `NoBannerImage`, `Bann
 -- Table structure for table `Page_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `Page_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Page_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `PageColor` varchar(6) DEFAULT NULL,
-  `LightTheme` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `NoBannerImage` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `LightTheme` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `NoBannerImage` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `BannerImageID` int(11) NOT NULL DEFAULT '0',
-  `LightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerFullscreen` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `BannerLightText` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `BannerImageID` (`BannerImageID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=218 ;
+  `LightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerFullscreen` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `BannerLightText` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Page_versions`
@@ -2914,20 +2788,16 @@ INSERT INTO `Page_versions` (`ID`, `RecordID`, `Version`, `PageColor`, `LightThe
 -- Table structure for table `Permission`
 --
 
-CREATE TABLE IF NOT EXISTS `Permission` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Permission` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('Permission') DEFAULT 'Permission',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Code` varchar(50) DEFAULT NULL,
   `Arg` int(11) NOT NULL DEFAULT '0',
   `Type` int(11) NOT NULL DEFAULT '1',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `GroupID` (`GroupID`),
-  KEY `Code` (`Code`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Permission`
@@ -2947,16 +2817,14 @@ INSERT INTO `Permission` (`ID`, `ClassName`, `LastEdited`, `Created`, `Code`, `A
 -- Table structure for table `PermissionRole`
 --
 
-CREATE TABLE IF NOT EXISTS `PermissionRole` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PermissionRole` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('PermissionRole') DEFAULT 'PermissionRole',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Title` varchar(50) DEFAULT NULL,
-  `OnlyAdminCanApply` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `OnlyAdminCanApply` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2964,17 +2832,14 @@ CREATE TABLE IF NOT EXISTS `PermissionRole` (
 -- Table structure for table `PermissionRoleCode`
 --
 
-CREATE TABLE IF NOT EXISTS `PermissionRoleCode` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `PermissionRoleCode` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('PermissionRoleCode') DEFAULT 'PermissionRoleCode',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
   `Code` varchar(50) DEFAULT NULL,
-  `RoleID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `RoleID` (`RoleID`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `RoleID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2982,14 +2847,12 @@ CREATE TABLE IF NOT EXISTS `PermissionRoleCode` (
 -- Table structure for table `RedirectorPage`
 --
 
-CREATE TABLE IF NOT EXISTS `RedirectorPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `RedirectorPage` (
+  `ID` int(11) NOT NULL,
   `RedirectionType` enum('Internal','External') DEFAULT 'Internal',
   `ExternalURL` varchar(2083) DEFAULT NULL,
-  `LinkToID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `LinkToID` (`LinkToID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LinkToID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -2997,14 +2860,12 @@ CREATE TABLE IF NOT EXISTS `RedirectorPage` (
 -- Table structure for table `RedirectorPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `RedirectorPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `RedirectorPage_Live` (
+  `ID` int(11) NOT NULL,
   `RedirectionType` enum('Internal','External') DEFAULT 'Internal',
   `ExternalURL` varchar(2083) DEFAULT NULL,
-  `LinkToID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `LinkToID` (`LinkToID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LinkToID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3012,19 +2873,14 @@ CREATE TABLE IF NOT EXISTS `RedirectorPage_Live` (
 -- Table structure for table `RedirectorPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `RedirectorPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `RedirectorPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `RedirectionType` enum('Internal','External') DEFAULT 'Internal',
   `ExternalURL` varchar(2083) DEFAULT NULL,
-  `LinkToID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `LinkToID` (`LinkToID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `LinkToID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3032,8 +2888,8 @@ CREATE TABLE IF NOT EXISTS `RedirectorPage_versions` (
 -- Table structure for table `SiteConfig`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('SiteConfig') DEFAULT 'SiteConfig',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -3051,12 +2907,8 @@ CREATE TABLE IF NOT EXISTS `SiteConfig` (
   `Email` varchar(250) DEFAULT NULL,
   `LogoID` int(11) NOT NULL DEFAULT '0',
   `LogoReverseID` int(11) NOT NULL DEFAULT '0',
-  `BrandColor` varchar(6) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `ClassName` (`ClassName`),
-  KEY `LogoID` (`LogoID`),
-  KEY `LogoReverseID` (`LogoReverseID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `BrandColor` varchar(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteConfig`
@@ -3071,14 +2923,11 @@ INSERT INTO `SiteConfig` (`ID`, `ClassName`, `LastEdited`, `Created`, `Title`, `
 -- Table structure for table `SiteConfig_CreateTopLevelGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig_CreateTopLevelGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig_CreateTopLevelGroups` (
+  `ID` int(11) NOT NULL,
   `SiteConfigID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteConfigID` (`SiteConfigID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3086,14 +2935,11 @@ CREATE TABLE IF NOT EXISTS `SiteConfig_CreateTopLevelGroups` (
 -- Table structure for table `SiteConfig_EditorGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig_EditorGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig_EditorGroups` (
+  `ID` int(11) NOT NULL,
   `SiteConfigID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteConfigID` (`SiteConfigID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3101,14 +2947,11 @@ CREATE TABLE IF NOT EXISTS `SiteConfig_EditorGroups` (
 -- Table structure for table `SiteConfig_ViewerGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteConfig_ViewerGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteConfig_ViewerGroups` (
+  `ID` int(11) NOT NULL,
   `SiteConfigID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteConfigID` (`SiteConfigID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3116,8 +2959,8 @@ CREATE TABLE IF NOT EXISTS `SiteConfig_ViewerGroups` (
 -- Table structure for table `SiteTree`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('SiteTree','Page','Blog','BlogPost','BlogEntry','ErrorPage','RedirectorPage','VirtualPage','BlogTree','BlogHolder') DEFAULT 'SiteTree',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -3127,21 +2970,17 @@ CREATE TABLE IF NOT EXISTS `SiteTree` (
   `Content` mediumtext,
   `MetaDescription` mediumtext,
   `ExtraMeta` mediumtext,
-  `ShowInMenus` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ShowInMenus` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `HasBrokenFile` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `HasBrokenLink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `HasBrokenFile` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `HasBrokenLink` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ReportClass` varchar(50) DEFAULT NULL,
   `CanViewType` enum('Anyone','LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `CanEditType` enum('LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `URLSegment` (`URLSegment`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteTree`
@@ -3149,7 +2988,7 @@ CREATE TABLE IF NOT EXISTS `SiteTree` (
 
 INSERT INTO `SiteTree` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`, `Title`, `MenuTitle`, `Content`, `MetaDescription`, `ExtraMeta`, `ShowInMenus`, `ShowInSearch`, `Sort`, `HasBrokenFile`, `HasBrokenLink`, `ReportClass`, `CanViewType`, `CanEditType`, `Version`, `ParentID`) VALUES
 (1, 'Blog', '2016-03-05 08:40:30', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p class="lead">Follow the adventures of a small Kiwi travelling the world!</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 15, 0),
-(4, 'ErrorPage', '2016-02-11 10:41:25', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn''t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
+(4, 'ErrorPage', '2016-02-11 10:41:25', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn\'t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (5, 'ErrorPage', '2016-02-11 10:41:25', '2016-02-11 10:41:24', 'server-error', 'Server error', NULL, '<p>Sorry, there was a problem with handling your request.</p>', NULL, NULL, 0, 0, 5, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (6, 'BlogPost', '2016-03-13 15:28:00', '2016-02-11 11:02:46', 'art-deco-capital', 'Art Deco Capital', NULL, '<p class="lead">The tens of thousands of people revelling in the 1930s atmosphere created in the heart of the city gives the sensation that you have travelled back in time to an era of glitz and glamour!</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 23, 1),
 (11, 'BlogPost', '2016-03-13 15:28:18', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, NULL, NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 11, 1),
@@ -3184,14 +3023,11 @@ INSERT INTO `SiteTree` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`
 -- Table structure for table `SiteTree_EditorGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_EditorGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_EditorGroups` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3199,15 +3035,12 @@ CREATE TABLE IF NOT EXISTS `SiteTree_EditorGroups` (
 -- Table structure for table `SiteTree_ImageTracking`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_ImageTracking` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_ImageTracking` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
   `FileID` int(11) NOT NULL DEFAULT '0',
-  `FieldName` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `FileID` (`FileID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `FieldName` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3215,15 +3048,12 @@ CREATE TABLE IF NOT EXISTS `SiteTree_ImageTracking` (
 -- Table structure for table `SiteTree_LinkTracking`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_LinkTracking` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_LinkTracking` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
   `ChildID` int(11) NOT NULL DEFAULT '0',
-  `FieldName` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `ChildID` (`ChildID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `FieldName` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3231,8 +3061,8 @@ CREATE TABLE IF NOT EXISTS `SiteTree_LinkTracking` (
 -- Table structure for table `SiteTree_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_Live` (
+  `ID` int(11) NOT NULL,
   `ClassName` enum('SiteTree','Page','Blog','BlogPost','BlogEntry','ErrorPage','RedirectorPage','VirtualPage','BlogTree','BlogHolder') DEFAULT 'SiteTree',
   `LastEdited` datetime DEFAULT NULL,
   `Created` datetime DEFAULT NULL,
@@ -3242,21 +3072,17 @@ CREATE TABLE IF NOT EXISTS `SiteTree_Live` (
   `Content` mediumtext,
   `MetaDescription` mediumtext,
   `ExtraMeta` mediumtext,
-  `ShowInMenus` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ShowInMenus` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `HasBrokenFile` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `HasBrokenLink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `HasBrokenFile` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `HasBrokenLink` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ReportClass` varchar(50) DEFAULT NULL,
   `CanViewType` enum('Anyone','LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `CanEditType` enum('LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `URLSegment` (`URLSegment`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteTree_Live`
@@ -3264,7 +3090,7 @@ CREATE TABLE IF NOT EXISTS `SiteTree_Live` (
 
 INSERT INTO `SiteTree_Live` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSegment`, `Title`, `MenuTitle`, `Content`, `MetaDescription`, `ExtraMeta`, `ShowInMenus`, `ShowInSearch`, `Sort`, `HasBrokenFile`, `HasBrokenLink`, `ReportClass`, `CanViewType`, `CanEditType`, `Version`, `ParentID`) VALUES
 (1, 'Blog', '2016-03-05 08:40:30', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p class="lead">Follow the adventures of a small Kiwi travelling the world!</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 15, 0),
-(4, 'ErrorPage', '2016-02-11 10:41:33', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn''t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
+(4, 'ErrorPage', '2016-02-11 10:41:33', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn\'t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (5, 'ErrorPage', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'server-error', 'Server error', NULL, '<p>Sorry, there was a problem with handling your request.</p>', NULL, NULL, 0, 0, 5, 0, 0, NULL, 'Inherit', 'Inherit', 1, 0),
 (6, 'BlogPost', '2016-03-13 15:28:00', '2016-02-11 11:02:46', 'art-deco-capital', 'Art Deco Capital', NULL, '<p class="lead">The tens of thousands of people revelling in the 1930s atmosphere created in the heart of the city gives the sensation that you have travelled back in time to an era of glitz and glamour!</p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 23, 1),
 (11, 'BlogPost', '2016-03-13 15:28:19', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, NULL, NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 11, 1),
@@ -3299,11 +3125,11 @@ INSERT INTO `SiteTree_Live` (`ID`, `ClassName`, `LastEdited`, `Created`, `URLSeg
 -- Table structure for table `SiteTree_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
-  `WasPublished` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `WasPublished` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `AuthorID` int(11) NOT NULL DEFAULT '0',
   `PublisherID` int(11) NOT NULL DEFAULT '0',
   `ClassName` enum('SiteTree','Page','Blog','BlogPost','BlogEntry','ErrorPage','RedirectorPage','VirtualPage','BlogTree','BlogHolder') DEFAULT 'SiteTree',
@@ -3315,25 +3141,16 @@ CREATE TABLE IF NOT EXISTS `SiteTree_versions` (
   `Content` mediumtext,
   `MetaDescription` mediumtext,
   `ExtraMeta` mediumtext,
-  `ShowInMenus` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `ShowInSearch` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `ShowInMenus` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `ShowInSearch` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `Sort` int(11) NOT NULL DEFAULT '0',
-  `HasBrokenFile` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `HasBrokenLink` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `HasBrokenFile` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `HasBrokenLink` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `ReportClass` varchar(50) DEFAULT NULL,
   `CanViewType` enum('Anyone','LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
   `CanEditType` enum('LoggedInUsers','OnlyTheseUsers','Inherit') DEFAULT 'Inherit',
-  `ParentID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `AuthorID` (`AuthorID`),
-  KEY `PublisherID` (`PublisherID`),
-  KEY `ParentID` (`ParentID`),
-  KEY `URLSegment` (`URLSegment`),
-  KEY `ClassName` (`ClassName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=223 ;
+  `ParentID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `SiteTree_versions`
@@ -3343,7 +3160,7 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (1, 1, 1, 1, 0, 0, 'Page', '2016-02-11 10:41:23', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p>Welcome to SilverStripe! This is the default homepage. You can edit this page by opening <a href="admin/">the CMS</a>.</p><p>You can now access the <a href="http://docs.silverstripe.org">developer documentation</a>, or begin the <a href="http://www.silverstripe.org/learn/lessons">SilverStripe lessons</a>.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (2, 2, 1, 1, 0, 0, 'Page', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'about-us', 'About Us', NULL, '<p>You can fill this page out with your own content, or delete it and create your own pages.<br></p>', NULL, NULL, 1, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (3, 3, 1, 1, 0, 0, 'Page', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'contact-us', 'Contact Us', NULL, '<p>You can fill this page out with your own content, or delete it and create your own pages.<br></p>', NULL, NULL, 1, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 0),
-(4, 4, 1, 1, 0, 0, 'ErrorPage', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn''t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 0),
+(4, 4, 1, 1, 0, 0, 'ErrorPage', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'page-not-found', 'Page not found', NULL, '<p>Sorry, it seems you were trying to access a page that doesn\'t exist.</p><p>Please check the spelling of the URL you were trying to access and try again.</p>', NULL, NULL, 0, 0, 4, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (5, 5, 1, 1, 0, 0, 'ErrorPage', '2016-02-11 10:41:24', '2016-02-11 10:41:24', 'server-error', 'Server error', NULL, '<p>Sorry, there was a problem with handling your request.</p>', NULL, NULL, 0, 0, 5, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (6, 1, 2, 1, 1, 1, '', '2016-02-11 11:02:17', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p>Welcome to SilverStripe! This is the default homepage. You can edit this page by opening <a href="admin/">the CMS</a>.</p><p>You can now access the <a href="http://docs.silverstripe.org">developer documentation</a>, or begin the <a href="http://www.silverstripe.org/learn/lessons">SilverStripe lessons</a>.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
 (7, 1, 3, 1, 1, 1, 'Blog', '2016-02-11 11:02:34', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p>Welcome to SilverStripe! This is the default homepage. You can edit this page by opening <a href="admin/">the CMS</a>.</p><p>You can now access the <a href="http://docs.silverstripe.org">developer documentation</a>, or begin the <a href="http://www.silverstripe.org/learn/lessons">SilverStripe lessons</a>.</p>', NULL, NULL, 1, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
@@ -3409,11 +3226,11 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 (67, 11, 3, 0, 1, 0, 'BlogPost', '2016-02-27 02:34:45', '2016-02-27 02:34:45', 'new-blog-post', 'New Blog Post', NULL, NULL, NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
 (68, 11, 4, 0, 1, 0, 'BlogPost', '2016-02-27 02:35:06', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, NULL, NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
 (69, 11, 5, 1, 1, 1, 'BlogPost', '2016-02-27 02:35:06', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, NULL, NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
-(70, 11, 6, 1, 1, 1, 'BlogPost', '2016-02-27 02:35:49', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, '<p class="lead">Hi, I''m Hamish... and this is my blog.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
-(71, 11, 7, 1, 1, 1, 'BlogPost', '2016-02-27 02:37:07', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, '<p class="lead">Hi, I''m Hamish... and this is my blog.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
+(70, 11, 6, 1, 1, 1, 'BlogPost', '2016-02-27 02:35:49', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, '<p class="lead">Hi, I\'m Hamish... and this is my blog.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
+(71, 11, 7, 1, 1, 1, 'BlogPost', '2016-02-27 02:37:07', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, '<p class="lead">Hi, I\'m Hamish... and this is my blog.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
 (72, 1, 14, 1, 1, 1, 'Blog', '2016-02-27 02:39:07', '2016-02-11 10:41:23', 'home', 'Home', NULL, '<p class="lead">They say as the world gets more connected the smaller it feels... but the more I learn about different people, places and cultures the bigger it becomes! <span>These are the discoveries of a small kiwi exploring the big wide world. </span></p>', NULL, NULL, 0, 1, 1, 0, 0, NULL, 'Inherit', 'Inherit', 0),
-(73, 11, 8, 1, 1, 1, 'BlogPost', '2016-02-27 02:41:22', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, '<p class="lead">Hi, I''m Hamish... and this is my blog.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
-(74, 11, 9, 1, 1, 1, 'BlogPost', '2016-02-27 02:56:35', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, '<p class="lead">Hi, I''m Hamish... and this is my blog.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
+(73, 11, 8, 1, 1, 1, 'BlogPost', '2016-02-27 02:41:22', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, '<p class="lead">Hi, I\'m Hamish... and this is my blog.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
+(74, 11, 9, 1, 1, 1, 'BlogPost', '2016-02-27 02:56:35', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, '<p class="lead">Hi, I\'m Hamish... and this is my blog.</p>', NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
 (75, 11, 10, 1, 1, 1, 'BlogPost', '2016-02-27 02:57:13', '2016-02-27 02:34:45', 'welcome-to-my-blog', 'Welcome to my blog', NULL, NULL, NULL, NULL, 0, 1, 2, 0, 0, NULL, 'Inherit', 'Inherit', 1),
 (76, 12, 2, 0, 1, 0, 'BlogPost', '2016-03-04 00:46:29', '2016-03-04 00:46:29', 'new-blog-post', 'New Blog Post', NULL, NULL, NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 1),
 (77, 12, 3, 0, 1, 0, 'BlogPost', '2016-03-04 03:47:03', '2016-03-04 00:46:29', 'day-one', 'Day One', NULL, NULL, NULL, NULL, 0, 1, 3, 0, 0, NULL, 'Inherit', 'Inherit', 1),
@@ -3570,14 +3387,11 @@ INSERT INTO `SiteTree_versions` (`ID`, `RecordID`, `Version`, `WasPublished`, `A
 -- Table structure for table `SiteTree_ViewerGroups`
 --
 
-CREATE TABLE IF NOT EXISTS `SiteTree_ViewerGroups` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `SiteTree_ViewerGroups` (
+  `ID` int(11) NOT NULL,
   `SiteTreeID` int(11) NOT NULL DEFAULT '0',
-  `GroupID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `SiteTreeID` (`SiteTreeID`),
-  KEY `GroupID` (`GroupID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `GroupID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3585,13 +3399,11 @@ CREATE TABLE IF NOT EXISTS `SiteTree_ViewerGroups` (
 -- Table structure for table `VirtualPage`
 --
 
-CREATE TABLE IF NOT EXISTS `VirtualPage` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `VirtualPage` (
+  `ID` int(11) NOT NULL,
   `VersionID` int(11) NOT NULL DEFAULT '0',
-  `CopyContentFromID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `CopyContentFromID` (`CopyContentFromID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `CopyContentFromID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3599,13 +3411,11 @@ CREATE TABLE IF NOT EXISTS `VirtualPage` (
 -- Table structure for table `VirtualPage_Live`
 --
 
-CREATE TABLE IF NOT EXISTS `VirtualPage_Live` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `VirtualPage_Live` (
+  `ID` int(11) NOT NULL,
   `VersionID` int(11) NOT NULL DEFAULT '0',
-  `CopyContentFromID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `CopyContentFromID` (`CopyContentFromID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `CopyContentFromID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -3613,19 +3423,837 @@ CREATE TABLE IF NOT EXISTS `VirtualPage_Live` (
 -- Table structure for table `VirtualPage_versions`
 --
 
-CREATE TABLE IF NOT EXISTS `VirtualPage_versions` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `VirtualPage_versions` (
+  `ID` int(11) NOT NULL,
   `RecordID` int(11) NOT NULL DEFAULT '0',
   `Version` int(11) NOT NULL DEFAULT '0',
   `VersionID` int(11) NOT NULL DEFAULT '0',
-  `CopyContentFromID` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
-  KEY `RecordID` (`RecordID`),
-  KEY `Version` (`Version`),
-  KEY `CopyContentFromID` (`CopyContentFromID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `CopyContentFromID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Blog`
+--
+ALTER TABLE `Blog`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogCategory`
+--
+ALTER TABLE `BlogCategory`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `BlogEntry`
+--
+ALTER TABLE `BlogEntry`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogEntry_Live`
+--
+ALTER TABLE `BlogEntry_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogEntry_versions`
+--
+ALTER TABLE `BlogEntry_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `BlogHolder`
+--
+ALTER TABLE `BlogHolder`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `OwnerID` (`OwnerID`);
+
+--
+-- Indexes for table `BlogHolder_Live`
+--
+ALTER TABLE `BlogHolder_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `OwnerID` (`OwnerID`);
+
+--
+-- Indexes for table `BlogHolder_versions`
+--
+ALTER TABLE `BlogHolder_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `OwnerID` (`OwnerID`);
+
+--
+-- Indexes for table `BlogPost`
+--
+ALTER TABLE `BlogPost`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FeaturedImageID` (`FeaturedImageID`),
+  ADD KEY `ThumbnailImageID` (`ThumbnailImageID`),
+  ADD KEY `CountryID` (`CountryID`),
+  ADD KEY `CountryIDID` (`CountryIDID`);
+
+--
+-- Indexes for table `BlogPost_Authors`
+--
+ALTER TABLE `BlogPost_Authors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogPostID` (`BlogPostID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `BlogPost_Categories`
+--
+ALTER TABLE `BlogPost_Categories`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogPostID` (`BlogPostID`),
+  ADD KEY `BlogCategoryID` (`BlogCategoryID`);
+
+--
+-- Indexes for table `BlogPost_Live`
+--
+ALTER TABLE `BlogPost_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FeaturedImageID` (`FeaturedImageID`),
+  ADD KEY `ThumbnailImageID` (`ThumbnailImageID`),
+  ADD KEY `CountryID` (`CountryID`),
+  ADD KEY `CountryIDID` (`CountryIDID`);
+
+--
+-- Indexes for table `BlogPost_Tags`
+--
+ALTER TABLE `BlogPost_Tags`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogPostID` (`BlogPostID`),
+  ADD KEY `BlogTagID` (`BlogTagID`);
+
+--
+-- Indexes for table `BlogPost_versions`
+--
+ALTER TABLE `BlogPost_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `FeaturedImageID` (`FeaturedImageID`),
+  ADD KEY `ThumbnailImageID` (`ThumbnailImageID`),
+  ADD KEY `CountryID` (`CountryID`),
+  ADD KEY `CountryIDID` (`CountryIDID`);
+
+--
+-- Indexes for table `BlogSection`
+--
+ALTER TABLE `BlogSection`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `MainImageID` (`MainImageID`),
+  ADD KEY `ClassName` (`ClassName`),
+  ADD KEY `ParentID` (`ParentID`);
+
+--
+-- Indexes for table `BlogSection_SectionImages`
+--
+ALTER TABLE `BlogSection_SectionImages`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogSectionID` (`BlogSectionID`),
+  ADD KEY `ImageID` (`ImageID`);
+
+--
+-- Indexes for table `BlogTag`
+--
+ALTER TABLE `BlogTag`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `BlogTree`
+--
+ALTER TABLE `BlogTree`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogTree_Live`
+--
+ALTER TABLE `BlogTree_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `BlogTree_versions`
+--
+ALTER TABLE `BlogTree_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `Blog_Contributors`
+--
+ALTER TABLE `Blog_Contributors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Blog_Editors`
+--
+ALTER TABLE `Blog_Editors`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Blog_Live`
+--
+ALTER TABLE `Blog_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `Blog_versions`
+--
+ALTER TABLE `Blog_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `Blog_Writers`
+--
+ALTER TABLE `Blog_Writers`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BlogID` (`BlogID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Comment`
+--
+ALTER TABLE `Comment`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `AuthorID` (`AuthorID`),
+  ADD KEY `ParentCommentID` (`ParentCommentID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `ContactRequest`
+--
+ALTER TABLE `ContactRequest`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Country`
+--
+ALTER TABLE `Country`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `PatternID` (`PatternID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Country_BlogPosts`
+--
+ALTER TABLE `Country_BlogPosts`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CountryID` (`CountryID`),
+  ADD KEY `BlogPostID` (`BlogPostID`);
+
+--
+-- Indexes for table `ErrorPage`
+--
+ALTER TABLE `ErrorPage`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `ErrorPage_Live`
+--
+ALTER TABLE `ErrorPage_Live`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `ErrorPage_versions`
+--
+ALTER TABLE `ErrorPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`);
+
+--
+-- Indexes for table `File`
+--
+ALTER TABLE `File`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `OwnerID` (`OwnerID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Group`
+--
+ALTER TABLE `Group`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Group_Members`
+--
+ALTER TABLE `Group_Members`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `GroupID` (`GroupID`),
+  ADD KEY `MemberID` (`MemberID`);
+
+--
+-- Indexes for table `Group_Roles`
+--
+ALTER TABLE `Group_Roles`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `GroupID` (`GroupID`),
+  ADD KEY `PermissionRoleID` (`PermissionRoleID`);
+
+--
+-- Indexes for table `LoginAttempt`
+--
+ALTER TABLE `LoginAttempt`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `MemberID` (`MemberID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Member`
+--
+ALTER TABLE `Member`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `Email` (`Email`),
+  ADD KEY `ClassName` (`ClassName`),
+  ADD KEY `BlogProfileImageID` (`BlogProfileImageID`);
+
+--
+-- Indexes for table `MemberPassword`
+--
+ALTER TABLE `MemberPassword`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `MemberID` (`MemberID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `Page`
+--
+ALTER TABLE `Page`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BannerImageID` (`BannerImageID`);
+
+--
+-- Indexes for table `Page_Live`
+--
+ALTER TABLE `Page_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `BannerImageID` (`BannerImageID`);
+
+--
+-- Indexes for table `Page_versions`
+--
+ALTER TABLE `Page_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `BannerImageID` (`BannerImageID`);
+
+--
+-- Indexes for table `Permission`
+--
+ALTER TABLE `Permission`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `GroupID` (`GroupID`),
+  ADD KEY `Code` (`Code`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `PermissionRole`
+--
+ALTER TABLE `PermissionRole`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `PermissionRoleCode`
+--
+ALTER TABLE `PermissionRoleCode`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `RoleID` (`RoleID`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `RedirectorPage`
+--
+ALTER TABLE `RedirectorPage`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `LinkToID` (`LinkToID`);
+
+--
+-- Indexes for table `RedirectorPage_Live`
+--
+ALTER TABLE `RedirectorPage_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `LinkToID` (`LinkToID`);
+
+--
+-- Indexes for table `RedirectorPage_versions`
+--
+ALTER TABLE `RedirectorPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `LinkToID` (`LinkToID`);
+
+--
+-- Indexes for table `SiteConfig`
+--
+ALTER TABLE `SiteConfig`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ClassName` (`ClassName`),
+  ADD KEY `LogoID` (`LogoID`),
+  ADD KEY `LogoReverseID` (`LogoReverseID`);
+
+--
+-- Indexes for table `SiteConfig_CreateTopLevelGroups`
+--
+ALTER TABLE `SiteConfig_CreateTopLevelGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteConfigID` (`SiteConfigID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteConfig_EditorGroups`
+--
+ALTER TABLE `SiteConfig_EditorGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteConfigID` (`SiteConfigID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteConfig_ViewerGroups`
+--
+ALTER TABLE `SiteConfig_ViewerGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteConfigID` (`SiteConfigID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteTree`
+--
+ALTER TABLE `SiteTree`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `URLSegment` (`URLSegment`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `SiteTree_EditorGroups`
+--
+ALTER TABLE `SiteTree_EditorGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `SiteTree_ImageTracking`
+--
+ALTER TABLE `SiteTree_ImageTracking`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `FileID` (`FileID`);
+
+--
+-- Indexes for table `SiteTree_LinkTracking`
+--
+ALTER TABLE `SiteTree_LinkTracking`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `ChildID` (`ChildID`);
+
+--
+-- Indexes for table `SiteTree_Live`
+--
+ALTER TABLE `SiteTree_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `URLSegment` (`URLSegment`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `SiteTree_versions`
+--
+ALTER TABLE `SiteTree_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `AuthorID` (`AuthorID`),
+  ADD KEY `PublisherID` (`PublisherID`),
+  ADD KEY `ParentID` (`ParentID`),
+  ADD KEY `URLSegment` (`URLSegment`),
+  ADD KEY `ClassName` (`ClassName`);
+
+--
+-- Indexes for table `SiteTree_ViewerGroups`
+--
+ALTER TABLE `SiteTree_ViewerGroups`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `SiteTreeID` (`SiteTreeID`),
+  ADD KEY `GroupID` (`GroupID`);
+
+--
+-- Indexes for table `VirtualPage`
+--
+ALTER TABLE `VirtualPage`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CopyContentFromID` (`CopyContentFromID`);
+
+--
+-- Indexes for table `VirtualPage_Live`
+--
+ALTER TABLE `VirtualPage_Live`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CopyContentFromID` (`CopyContentFromID`);
+
+--
+-- Indexes for table `VirtualPage_versions`
+--
+ALTER TABLE `VirtualPage_versions`
+  ADD PRIMARY KEY (`ID`),
+  ADD UNIQUE KEY `RecordID_Version` (`RecordID`,`Version`),
+  ADD KEY `RecordID` (`RecordID`),
+  ADD KEY `Version` (`Version`),
+  ADD KEY `CopyContentFromID` (`CopyContentFromID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Blog`
+--
+ALTER TABLE `Blog`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `BlogCategory`
+--
+ALTER TABLE `BlogCategory`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogEntry`
+--
+ALTER TABLE `BlogEntry`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogEntry_Live`
+--
+ALTER TABLE `BlogEntry_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogEntry_versions`
+--
+ALTER TABLE `BlogEntry_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogHolder`
+--
+ALTER TABLE `BlogHolder`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogHolder_Live`
+--
+ALTER TABLE `BlogHolder_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogHolder_versions`
+--
+ALTER TABLE `BlogHolder_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost`
+--
+ALTER TABLE `BlogPost`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `BlogPost_Authors`
+--
+ALTER TABLE `BlogPost_Authors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT for table `BlogPost_Categories`
+--
+ALTER TABLE `BlogPost_Categories`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost_Live`
+--
+ALTER TABLE `BlogPost_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `BlogPost_Tags`
+--
+ALTER TABLE `BlogPost_Tags`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogPost_versions`
+--
+ALTER TABLE `BlogPost_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+--
+-- AUTO_INCREMENT for table `BlogSection`
+--
+ALTER TABLE `BlogSection`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+--
+-- AUTO_INCREMENT for table `BlogSection_SectionImages`
+--
+ALTER TABLE `BlogSection_SectionImages`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=685;
+--
+-- AUTO_INCREMENT for table `BlogTag`
+--
+ALTER TABLE `BlogTag`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogTree`
+--
+ALTER TABLE `BlogTree`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogTree_Live`
+--
+ALTER TABLE `BlogTree_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `BlogTree_versions`
+--
+ALTER TABLE `BlogTree_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Contributors`
+--
+ALTER TABLE `Blog_Contributors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Editors`
+--
+ALTER TABLE `Blog_Editors`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Blog_Live`
+--
+ALTER TABLE `Blog_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `Blog_versions`
+--
+ALTER TABLE `Blog_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `Blog_Writers`
+--
+ALTER TABLE `Blog_Writers`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Comment`
+--
+ALTER TABLE `Comment`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `ContactRequest`
+--
+ALTER TABLE `ContactRequest`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Country`
+--
+ALTER TABLE `Country`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `Country_BlogPosts`
+--
+ALTER TABLE `Country_BlogPosts`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ErrorPage`
+--
+ALTER TABLE `ErrorPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `ErrorPage_Live`
+--
+ALTER TABLE `ErrorPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `ErrorPage_versions`
+--
+ALTER TABLE `ErrorPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `File`
+--
+ALTER TABLE `File`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=780;
+--
+-- AUTO_INCREMENT for table `Group`
+--
+ALTER TABLE `Group`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `Group_Members`
+--
+ALTER TABLE `Group_Members`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `Group_Roles`
+--
+ALTER TABLE `Group_Roles`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `LoginAttempt`
+--
+ALTER TABLE `LoginAttempt`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `Member`
+--
+ALTER TABLE `Member`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `MemberPassword`
+--
+ALTER TABLE `MemberPassword`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `Page`
+--
+ALTER TABLE `Page`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `Page_Live`
+--
+ALTER TABLE `Page_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `Page_versions`
+--
+ALTER TABLE `Page_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
+--
+-- AUTO_INCREMENT for table `Permission`
+--
+ALTER TABLE `Permission`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `PermissionRole`
+--
+ALTER TABLE `PermissionRole`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `PermissionRoleCode`
+--
+ALTER TABLE `PermissionRoleCode`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `RedirectorPage`
+--
+ALTER TABLE `RedirectorPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `RedirectorPage_Live`
+--
+ALTER TABLE `RedirectorPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `RedirectorPage_versions`
+--
+ALTER TABLE `RedirectorPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteConfig`
+--
+ALTER TABLE `SiteConfig`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `SiteConfig_CreateTopLevelGroups`
+--
+ALTER TABLE `SiteConfig_CreateTopLevelGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteConfig_EditorGroups`
+--
+ALTER TABLE `SiteConfig_EditorGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteConfig_ViewerGroups`
+--
+ALTER TABLE `SiteConfig_ViewerGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree`
+--
+ALTER TABLE `SiteTree`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `SiteTree_EditorGroups`
+--
+ALTER TABLE `SiteTree_EditorGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree_ImageTracking`
+--
+ALTER TABLE `SiteTree_ImageTracking`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree_LinkTracking`
+--
+ALTER TABLE `SiteTree_LinkTracking`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `SiteTree_Live`
+--
+ALTER TABLE `SiteTree_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `SiteTree_versions`
+--
+ALTER TABLE `SiteTree_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
+--
+-- AUTO_INCREMENT for table `SiteTree_ViewerGroups`
+--
+ALTER TABLE `SiteTree_ViewerGroups`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VirtualPage`
+--
+ALTER TABLE `VirtualPage`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VirtualPage_Live`
+--
+ALTER TABLE `VirtualPage_Live`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `VirtualPage_versions`
+--
+ALTER TABLE `VirtualPage_versions`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
